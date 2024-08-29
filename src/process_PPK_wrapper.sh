@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Example of PPK processing with one single base and several rovers running simultaneously
+
+# set -o errexit
+# set -o nounset
+# set -o pipefail
+
+red='\033[0;31m'
+orange='\033[0;33m'
+green='\033[0;32m'
+nc='\033[0m' # No Color
+log_info() { echo -e "${green}[$(date --iso-8601=seconds)] [INFO] ${*}${nc}"; }
+log_warn() { echo -e "${orange}[$(date --iso-8601=seconds)] [WARN] ${*}${nc}"; }
+log_err() { echo -e "${red}[$(date --iso-8601=seconds)] [ERR] ${*}${nc}" 1>&2; }
+
+base_path="/home/adrien/base" 
+rover_paths=("/home/adrien/rover/rover1" "/home/adrien/rover/rover2" "/home/adrien/rover/rover3")
+results_path="/home/adrien/results"
+config_path="/home/adrien/config.conf"
+
+for rover_path in ${rover_paths[@]}; do
+    ./process_PPK.sh -b ${base_path} -r ${rover_path} -o ${results_path} -c ${config_path}
+done
