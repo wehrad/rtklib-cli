@@ -2,7 +2,8 @@
 
 rtklib-cli is a series of preset bash commands to process GNSS data in
 Post Processed Kinematics (PPK) and Precise Point Positioning (PPP)
-using the Command Line Interface (CLI) of open source [[https://github.com/rtklibexplorer/RTKLIB][RTKLIB]]. You'd like to
-process your data in PPK looking at standard examples or don't have
-the time to dive into the many parameters? This can be useful to you.
+using the Command Line Interface (CLI) of open source [[https://github.com/rtklibexplorer/RTKLIB][RTKLIB]]. If you'd
+like process your data in PPK looking at standard examples and/or
+don't have the time to dive into the many available parameters, this
+might be useful to you.
 
