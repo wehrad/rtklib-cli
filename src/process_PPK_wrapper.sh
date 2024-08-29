@@ -14,7 +14,14 @@ log_warn() { echo -e "${orange}[$(date --iso-8601=seconds)] [WARN] ${*}${nc}"; }
 log_err() { echo -e "${red}[$(date --iso-8601=seconds)] [ERR] ${*}${nc}" 1>&2; }
 
 base_path="/home/adrien/base" 
+
+# either write the paths directly
 rover_paths=("/home/adrien/rover/rover1" "/home/adrien/rover/rover2" "/home/adrien/rover/rover3")
+
+# or list them from a folder
+rover_folder_path="/path/to/rovers"
+rover_paths=$(find "${rover_folder_path}"/*rover* -type d)
+
 results_path="/home/adrien/results"
 config_path="/home/adrien/config.conf"
 

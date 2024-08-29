@@ -119,11 +119,7 @@ command="rnx2rtkp ${rover_obsfiles} ${base_obsfiles} ${base_navfiles} -o ${outpu
 
 log_info "PPK processing starting... Process can take hours to days depending on the size of your dataset.\n"
 log_info "${command}\n"
-log_info "Once GNSS files are loaded (which can take several minutes/tens of minutes depending
-on your dataset), the processing quality level Q will be printed and updated at high rate. Q=1:
-fixed solution (the highest quality position solution). Q=2: float solution (lower quality, can
-be due to some noisy satellite retrievals). Q=5: single solution, meaning RTKLIB couldn't use
-your base files. In that case, check your base input folder.\n"
+log_info "Once GNSS files are loaded (which can take several minutes/tens of minutes depending on your dataset), the processing quality level Q will be printed and updated at high rate. Q=1: fixed solution (the highest quality position solution). Q=2: float solution (lower quality, can be due to some noisy satellite retrievals). Q=5: single solution, meaning RTKLIB couldn't use your base files. In that case, check your base input folder.\n"
 
 [[ $(which rnx2rtkp) ]] || (
     log_err "rnx2rtkp not found. Make sure RTKLIB is in your PATH or pass the full path to binary."
