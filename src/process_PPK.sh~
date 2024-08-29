@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function print_usage() {
+	echo ""
+	echo "./process_PPK.sh -i inpath -o outpath -X file.config [-h -v -t]"
+	echo "  -i: Full path to folder containing RINEX files v2.11"
+	echo "  -o: Path where to store ouput"
+	echo "  -X: Specify XML file"
+	echo "  -v: Print verbose messages during processing"
+	echo "  -t: Print timing messages during processing"
+	echo "  -h: print this help"
+	echo ""
+}
