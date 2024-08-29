@@ -81,9 +81,9 @@ while [[ $# -gt 0 ]]; do
         shift
         ;;
     *) # unknown option
-	log_err "An unkown option was passed."
-	print_usage
-	exit 1
+        log_err "An unkown option was passed."
+        print_usage
+        exit 1
         shift
         ;;
     esac
@@ -127,4 +127,3 @@ log_info "Once GNSS files are loaded (which can take several minutes/tens of min
 )
 eval "${command}"
 log_info "PPK processing done. Check ${output_file}.\n"
-

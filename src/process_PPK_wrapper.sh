@@ -13,7 +13,7 @@ log_info() { echo -e "${green}[$(date --iso-8601=seconds)] [INFO] ${*}${nc}"; }
 log_warn() { echo -e "${orange}[$(date --iso-8601=seconds)] [WARN] ${*}${nc}"; }
 log_err() { echo -e "${red}[$(date --iso-8601=seconds)] [ERR] ${*}${nc}" 1>&2; }
 
-base_path="/home/adrien/base" 
+base_path="/home/adrien/base"
 
 # either write the paths directly
 rover_paths=("/home/adrien/rover/rover1" "/home/adrien/rover/rover2" "/home/adrien/rover/rover3")
