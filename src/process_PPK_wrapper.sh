@@ -13,17 +13,17 @@ log_info() { echo -e "${green}[$(date --iso-8601=seconds)] [INFO] ${*}${nc}"; }
 log_warn() { echo -e "${orange}[$(date --iso-8601=seconds)] [WARN] ${*}${nc}"; }
 log_err() { echo -e "${red}[$(date --iso-8601=seconds)] [ERR] ${*}${nc}" 1>&2; }
 
-base_path="/home/adrien/base"
+base_path="/path/to/base" 
 
 # either write the paths directly
-rover_paths=("/home/adrien/rover/rover1" "/home/adrien/rover/rover2" "/home/adrien/rover/rover3")
+rover_paths=("/path/to/rover1" "/path/to/rover2" "/path/to/rover3")
 
 # or list them from a folder
 rover_folder_path="/path/to/rovers"
 rover_paths=$(find "${rover_folder_path}"/*rover* -type d)
 
-results_path="/home/adrien/results"
-config_path="/home/adrien/config.conf"
+results_path="/path/to/results"
+config_path="/path/to/PPK.conf"
 
 for rover_path in ${rover_paths[@]}; do
     ./process_PPK.sh -b ${base_path} -r ${rover_path} -o ${results_path} -c ${config_path}
