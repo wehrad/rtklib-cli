@@ -13,6 +13,8 @@ log_info() { echo -e "${green}[$(date --iso-8601=seconds)] [INFO] ${*}${nc}"; }
 log_warn() { echo -e "${orange}[$(date --iso-8601=seconds)] [WARN] ${*}${nc}"; }
 log_err() { echo -e "${red}[$(date --iso-8601=seconds)] [ERR] ${*}${nc}" 1>&2; }
 
+rinex_conversion=true
+
 base_path="/path/to/base" 
 
 # either write the paths directly
@@ -25,6 +27,15 @@ rover_paths=$(find "${rover_folder_path}"/*rover* -type d)
 results_path="/path/to/results"
 config_path="/path/to/PPK.conf"
 
+if [ "${rinex_conversion}" = true ]; then
+    ./convert_RINEX.sh -i ${base_path} -vi 3 -vo 2.11
+fi	
+
 for rover_path in ${rover_paths[@]}; do
+
+    if [ "${rinex_conversion}" = true ]; then
+	./convert_RINEX.sh -i ${rover_path} -vi 3 -vo 2.11
+    fi	
+	
     ./process_PPK.sh -b ${base_path} -r ${rover_path} -o ${results_path} -c ${config_path}
 done
