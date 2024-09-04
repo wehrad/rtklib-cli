@@ -115,7 +115,7 @@ base_obsfiles=${base_input_path}/\*.obs
 base_navfiles=${base_input_path}/\*.nav
 output_file=${output_path}/PPK_results_$(date '+%Y%m%d_%H%M%S').pos
 
-echo "${base_obsfiles}"
+echo "${base_obsfiles} ${base_navfiles}"
 
 command="rnx2rtkp ${rover_obsfiles} ${base_obsfiles} ${base_navfiles} -o ${output_file} -k ${config_file}"
 
