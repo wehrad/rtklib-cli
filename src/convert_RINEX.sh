@@ -97,9 +97,7 @@ if [[ -z ${output_rinex_version:-} ]]; then
     exit 1
 fi
 
-file_list=eval "${files}"
-
-for file in ${file_list[@]}; do
+for file in ${files[@]}; do
     command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
 fi
     
