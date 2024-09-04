@@ -107,4 +107,4 @@ log_info "${command}\n"
     exit 1
 )
 eval "${command}"
-log_info "RINEX conversion done. Check ${rinex_path}.\n"
+log_info "RINEX conversion done. Check ${files}.\n"
