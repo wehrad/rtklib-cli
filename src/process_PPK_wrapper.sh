@@ -13,7 +13,7 @@ log_info() { echo -e "${green}[$(date --iso-8601=seconds)] [INFO] ${*}${nc}"; }
 log_warn() { echo -e "${orange}[$(date --iso-8601=seconds)] [WARN] ${*}${nc}"; }
 log_err() { echo -e "${red}[$(date --iso-8601=seconds)] [ERR] ${*}${nc}" 1>&2; }
 
-rinex_conversion=true
+rinex_conversion=false
 
 base_path="/path/to/base" 
 

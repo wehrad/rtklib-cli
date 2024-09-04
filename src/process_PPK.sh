@@ -6,8 +6,9 @@ set -o pipefail
 
 function print_usage() {
     echo ""
-    echo "./process_PPK.sh -b base_input_path -r rover_input_path
+    echo "./process_PPK.sh -p -b base_input_path -r rover_input_path
               -o outpath -c file.conf [-h -v -t]"
+    echo "  -p: Full path to RTKLIB installation"
     echo "  -b: Full path to folder containing base RINEX files v2.11"
     echo "  -r: Full path to folder containing rover RINEX files v2.11"
     echo "  -o: Full path to store outputs (POS files)"
@@ -51,6 +52,11 @@ while [[ $# -gt 0 ]]; do
         print_usage
         exit 1
         ;;
+    -p)
+        rtklib_path="$2"
+        shift # past argument
+        shift # past value
+        ;;
     -b)
         base_input_path="$2"
         shift # past argument
@@ -89,6 +95,11 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+if [[ -z ${rtklib_path:-} ]]; then
+    log_err "Path to RTKLIB installation not set (-b)"
+    print_usage
+    exit 1
+fi
 if [[ -z ${base_input_path:-} ]]; then
     log_err "Base input path not set (-b)"
     print_usage
@@ -117,7 +128,9 @@ output_file=${output_path}/PPK_results_$(date '+%Y%m%d_%H%M%S').pos
 
 echo "${base_obsfiles} ${base_navfiles}"
 
-command="rnx2rtkp ${rover_obsfiles} ${base_obsfiles} ${base_navfiles} -o ${output_file} -k ${config_file}"
+rtklib_function=${rtklib_path}/app/consapp/rnx2rtkp/gcc/rnx2rtkp
+
+command="${rtklib_function} ${rover_obsfiles} ${base_obsfiles} ${base_navfiles} -o ${output_file} -k ${config_file}"
 
 log_info "PPK processing starting... Process can take hours to days depending on the size of your dataset.\n"
 log_info "${command}\n"
