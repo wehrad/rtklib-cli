@@ -106,15 +106,16 @@ fi
 files=${file_path}/*.${file_extension}
 
 log_info "RINEX conversion starting...\n"
-log_info "${command}\n"
 
 for file in ${files[@]}; do
+    log_info "${command}\n"
     command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
+    eval "${command}"
 done
     
 [[ $(which convbin) ]] || (
     log_err "convbin not found. Make sure RTKLIB is in your PATH or pass the full path to binary."
     exit 1
 )
-eval "${command}"
+
 log_info "RINEX conversion done. Check ${files}.\n"
