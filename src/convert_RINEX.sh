@@ -99,7 +99,7 @@ fi
 
 for file in ${files[@]}; do
     command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
-fi
+done
     
 log_info "RINEX conversion starting...\n"
 log_info "${command}\n"
