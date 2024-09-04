@@ -118,4 +118,4 @@ done
     exit 1
 )
 
-log_info "RINEX conversion done. Check ${files}.\n"
+log_info "RINEX conversion done.\n"
