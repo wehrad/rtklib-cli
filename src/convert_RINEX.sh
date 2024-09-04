@@ -87,7 +87,7 @@ if [[ -z ${file_path:-} ]]; then
     exit 1
 fi
 if [[ -z ${rinex_version:-} ]]; then
-    log_err "Current version of RINEX files not set (-vi)"
+    log_err "Version of RINEX files not set (-vi)"
     print_usage
     exit 1
 fi
