@@ -121,9 +121,9 @@ if [[ -z ${config_file:-} ]]; then
     print_usage
 fi
 
-rover_obsfiles=${rover_input_path}/\*.obs
-base_obsfiles=${base_input_path}/\*.obs
-base_navfiles=${base_input_path}/\*.nav
+rover_obsfiles=${rover_input_path}/*.obs
+base_obsfiles=${base_input_path}/*.obs
+base_navfiles=${base_input_path}/*.nav
 output_file=${output_path}/PPK_results_$(date '+%Y%m%d_%H%M%S').pos
 
 rtklib_function=${rtklib_path}/app/consapp/rnx2rtkp/gcc/rnx2rtkp
