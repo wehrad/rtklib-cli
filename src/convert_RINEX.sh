@@ -6,11 +6,10 @@ set -o pipefail
 
 function print_usage() {
     echo ""
-    echo "./convert_RINEX.sh -i file_path -e file_extension -vi old_rinex_version -vo new_rinex_version [-h -v -t]"
+    echo "./convert_RINEX.sh -i file_path -e file_extension -rv rinex_version [-h -v -t]"
     echo "  -i: Full path to files"
     echo "  -e: File extension"
-    echo "  -vi: RINEX version of inputs" # in the future can be directly parsed from header
-    echo "  -vo: Desired RINEX version"
+    echo "  -rv: RINEX version"
     echo "  -v: Print verbose messages during processing"
     echo "  -t: Print timing messages during processing"
     echo "  -h: print this help"
@@ -59,15 +58,10 @@ while [[ $# -gt 0 ]]; do
         shift # past argument
         shift # past value
         ;;
-    -vi)
-        input_rinex_version="$2"
+    -rv)
+        rinex_version="$2"
         shift # past argument
         shift # past value
-        ;;
-    -vo)
-        output_rinex_version="$2"
-        shift
-        shift
         ;;
     -v | --verbose)
         verbose=1
@@ -92,13 +86,8 @@ if [[ -z ${file_path:-} ]]; then
     print_usage
     exit 1
 fi
-if [[ -z ${input_rinex_version:-} ]]; then
+if [[ -z ${rinex_version:-} ]]; then
     log_err "Current version of RINEX files not set (-vi)"
-    print_usage
-    exit 1
-fi
-if [[ -z ${output_rinex_version:-} ]]; then
-    log_err "Desired version of RINEX files not set (-vo)"
     print_usage
     exit 1
 fi
@@ -108,7 +97,7 @@ files=${file_path}/*.${file_extension}
 log_info "RINEX conversion starting...\n"
 
 for file in ${files[@]}; do
-    command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
+    command="convbin -od -os -oi -ot -ol -v ${rinex_version} ${file}"
     log_info "${command}\n"
     eval "${command}"
 done
