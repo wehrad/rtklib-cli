@@ -97,8 +97,12 @@ if [[ -z ${output_rinex_version:-} ]]; then
     exit 1
 fi
 
-command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${files}"
+file_list=eval "${files}"
 
+for file in ${file_list[@]}; do
+    command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
+fi
+    
 log_info "RINEX conversion starting...\n"
 log_info "${command}\n"
 
