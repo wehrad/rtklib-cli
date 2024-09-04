@@ -97,7 +97,12 @@ if [[ -z ${output_rinex_version:-} ]]; then
     exit 1
 fi
 
-command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version}"
+obsfiles=${rinex_path}/\*.obs
+navfiles=${rinex_path}/\*.nav
+
+
+command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${obsfiles}"
+command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${navfiles}"
 
 log_info "RINEX conversion starting...\n"
 log_info "${command}\n"
