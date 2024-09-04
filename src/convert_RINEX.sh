@@ -108,8 +108,8 @@ files=${file_path}/*.${file_extension}
 log_info "RINEX conversion starting...\n"
 
 for file in ${files[@]}; do
-    log_info "${command}\n"
     command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
+    log_info "${command}\n"
     eval "${command}"
 done
     
