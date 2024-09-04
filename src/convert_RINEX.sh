@@ -6,8 +6,9 @@ set -o pipefail
 
 function print_usage() {
     echo ""
-    echo "./convert_RINEX.sh -i files -vi old_rinex_version -vo new_rinex_version [-h -v -t]"
-    echo "  -i: Full path to files listed with wildcard"
+    echo "./convert_RINEX.sh -i file_path -e file_extension -vi old_rinex_version -vo new_rinex_version [-h -v -t]"
+    echo "  -i: Full path to files"
+    echo "  -e: File extension"
     echo "  -vi: RINEX version of inputs" # in the future can be directly parsed from header
     echo "  -vo: Desired RINEX version"
     echo "  -v: Print verbose messages during processing"
@@ -49,7 +50,12 @@ while [[ $# -gt 0 ]]; do
         exit 1
         ;;
     -i)
-        files="$2"
+        file_path="$2"
+        shift # past argument
+        shift # past value
+        ;;
+    -e)
+        file_extension="$2"
         shift # past argument
         shift # past value
         ;;
@@ -81,7 +87,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z ${files:-} ]]; then
+if [[ -z ${file_path:-} ]]; then
     log_err "Path to files not set (-i)"
     print_usage
     exit 1
@@ -97,13 +103,15 @@ if [[ -z ${output_rinex_version:-} ]]; then
     exit 1
 fi
 
+files=${file_path}/*.${file_extension}
+
+log_info "RINEX conversion starting...\n"
+log_info "${command}\n"
+
 for file in ${files[@]}; do
     command="convbin -od -os -oi -ot -ol -f ${output_rinex_version} -v ${input_rinex_version} ${file}"
 done
     
-log_info "RINEX conversion starting...\n"
-log_info "${command}\n"
-
 [[ $(which convbin) ]] || (
     log_err "convbin not found. Make sure RTKLIB is in your PATH or pass the full path to binary."
     exit 1
