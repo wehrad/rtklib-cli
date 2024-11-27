@@ -142,4 +142,3 @@ log_info "Once GNSS files are loaded (which can take several minutes/tens of min
 )
 eval "${command}"
 log_info "PPK processing done. Check ${output_file}.\n"
-
