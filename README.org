@@ -1,3 +1,5 @@
+[[https://github.com/AdrienWehrle/rtklib-cli/actions][file:https://github.com/AdrienWehrle/rtklib-cli/workflows/CI/badge.svg]]
+
 * What is rtklib-cli?
 
 rtklib-cli is a series of preset bash commands to process GNSS data in
